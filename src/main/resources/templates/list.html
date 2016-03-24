@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+    <title>User management</title>
+    <link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+</head>
+<body ng-app="UserManagementApp" ng-controller="user">
+<div>
+    <h2>Users list</h2>
+
+    <div class="list-group" ng-repeat="data in users track by $index">
+        <user data="data"></user>
+    </div>
+</div>
+<script th:src="@{/webjars/angularjs/1.4.0/angular.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.2/restangular.js"></script>
+<script>
+    var UserManagement = UserManagement || {};
+</script>
+<!--App bootstrap js-->
+<script src="/js/app.js"></script>
+<!--App configs-->
+<script src="/js/config/namespace.js"></script>
+<script src="/js/config/config.js"></script>
+<script src="/js/config/restAngularProvider.js"></script>
+<!--App controllers-->
+<script src="/js/controller/UserCtrl.js"></script>
+<!--App directives-->
+<script src="/js/directive/user.js"></script>
+</body>
+</html>

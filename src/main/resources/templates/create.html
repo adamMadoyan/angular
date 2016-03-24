@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+    <title>User management</title>
+    <link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+</head>
+<body ng-app="UserManagementApp" ng-controller="user">
+
+<!--<h1>Modal example</h1>-->
+<!--<button ng-click="toggleModal()" class="btn btn-default">Open modal</button>-->
+
+<!--<modal title="Login form" visible="showModal">-->
+    <!--<form role="form">-->
+        <!--<div class="form-group">-->
+            <!--<label for="email">Email address</label>-->
+            <!--<input type="email" class="form-control" id="email" placeholder="Enter email" />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="password">Password</label>-->
+            <!--<input type="password" class="form-control" id="password" placeholder="Password" />-->
+        <!--</div>-->
+        <!--<button type="submit" class="btn btn-default">Submit</button>-->
+    <!--</form>-->
+<!--</modal>-->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-6">
+                <!-- FORM ============ -->
+
+                <form name="userForm" ng-submit="addUser()" novalidate="novalidate">
+
+                    <!-- FIRS TNAME -->
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.firstName.$invalid &amp;&amp; !userForm.firstName.$pristine }">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" class="form-control" ng-model="user.firstName" required="required"/>
+                        <p ng-show="userForm.firstName.$invalid &amp;&amp; !userForm.firstName.$pristine" class="help-block">First name is required.</p>
+                    </div>
+
+                    <!-- LAST NAME -->
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.lastName.$invalid &amp;&amp; userForm.lastName.$dirty }">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" class="form-control" ng-model="user.lastName" required="required"/>
+                        <p ng-show="userForm.lastName.$invalid &amp;&amp; !userForm.lastName.$pristine" class="help-block">Last name is required.</p>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid &amp;&amp; !userForm.email.$pristine }">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" ng-model="user.email" required="required"/>
+                        <p ng-show="userForm.email.$invalid &amp;&amp; !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid &amp;&amp; !userForm.password.$pristine }">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="5" ng-maxlength="50"/>
+                        <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+                        <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+
+                </form>
+            </div>
+
+            <div class="col-sm-6">
+                <!-- VALIDATION TABLES ======== -->
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h3>Form</h3>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td ng-class="{ success: userForm.$valid, danger: userForm.$invalid }">Valid</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.$pristine, danger: !userForm.$pristine }">Pristine</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.$dirty }">Dirty</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-3">
+                        <h3>FirstName</h3>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td ng-class="{ success: userForm.firstName.$valid, danger: userForm.firstName.$invalid }">Valid</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.firstName.$pristine, danger: !userForm.firstName.$pristine }">Pristine</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.firstName.$dirty }">Dirty</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.firstName.$touched }">Touched</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-3">
+                        <h3>LastName</h3>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td ng-class="{ success: userForm.lastName.$valid, danger: userForm.lastName.$invalid }">Valid</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.lastName.$pristine, danger: !userForm.lastName.$pristine }">Pristine</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.lastName.$dirty }">Dirty</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.lastName.$touched }">Touched</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-3">
+                        <h3>Email</h3>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td ng-class="{ success: userForm.email.$valid, danger: userForm.email.$invalid }">Valid</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.email.$pristine, danger: !userForm.email.$pristine }">Pristine</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.email.$dirty }">Dirty</td>
+                            </tr>
+                            <tr>
+                                <td ng-class="{ success: userForm.email.$touched }">Touched</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script th:src="@{/webjars/angularjs/1.4.0/angular.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.2/restangular.js"></script>
+<script>
+    var UserManagement = UserManagement || {};
+</script>
+<!--App bootstrap js-->
+<script src="/js/app.js"></script>
+<!--App configs-->
+<script src="/js/config/namespace.js"></script>
+<script src="/js/config/config.js"></script>
+<script src="/js/config/restAngularProvider.js"></script>
+<!--App controllers-->
+<script src="/js/controller/UserCtrl.js"></script>
+<!--App directives-->
+<script src="/js/directive/modal.js"></script>
+</body>
+</html>
