@@ -1,0 +1,24 @@
+
+<div class="container" ng-controller="login">
+    <div class="row">
+        <div class="center-block center">
+
+            <form class="form-signin" ng-submit="login()">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input ng-model="data.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus=""/>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input ng-model="data.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required=""/>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"/> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+
+            <!--<a href="/user/list" class="btn btn-primary">Users list</a>-->
+            <!--<a href="/user/create" class="btn btn-success">Create a new user</a>-->
+        </div>
+    </div>
+</div>
