@@ -2,5 +2,5 @@
 
 UserManagement.app.config(function (RestangularProvider, Config) {
     RestangularProvider.setBaseUrl(Config.apiUrl);
-    //RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
+    RestangularProvider.setDefaultHeaders({ "Content-Type": "application/json" });
 });

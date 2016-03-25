@@ -33,7 +33,7 @@ public class AuthenticationController {
     public ResponseDTO login(@Param("email") String email, @Param("password") String password) {
         try {
             User user = userManager.getUserBy(email, password);
-            return new ResponseDTO(OK, "", user);
+            return new ResponseDTO(OK, "User", user);
         } catch (DataBaseException | EntityNotFoundException e) {
             e.printStackTrace();
             return new ResponseDTO(INTERNAL_SERVER_ERROR);

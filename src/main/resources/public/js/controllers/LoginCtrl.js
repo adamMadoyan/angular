@@ -4,7 +4,9 @@
  * app user controllers
  */
 
-UserManagement.app.controllers.controller("login", ["$scope", "Restangular", "$state", function ($scope, Restangular, $state) {
+UserManagement.app.controllers.controller("login",
+            ["$rootScope", "$scope", "Restangular", "$state",
+    function ($rootScope, $scope, Restangular, $state) {
 
     console.info('login controller');
 
@@ -27,8 +29,10 @@ UserManagement.app.controllers.controller("login", ["$scope", "Restangular", "$s
             .customGET('', {email: $scope.data.email, password: $scope.data.password})
             .then(function (data) {
                 console.info(data);
+                console.info(data.data);
+                $rootScope.user = data.data;
                 if (data.code == 200) {
-                    $state.go('home');
+                    $state.go('home', data.data);
                 }
             });
     };

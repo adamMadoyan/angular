@@ -11,12 +11,10 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 name: 'login',
                 title: 'login',
                 url: '/login',
-                views: {
-                    "view": { templateUrl: "/views/partials/login.html" }
-                },
-                controller: function($scope) {
-                    console.info('sdfsdfsdf');
-                    $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
+                templateUrl: "/views/partials/login.html",
+                controller: 'login',
+                data : {
+                    pageMessage: 'login'
                 }
             })
             .state('home', {
@@ -24,19 +22,30 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 title: 'home',
                 url: '/home',
                 controller: 'home',
-                views: {
-                    "view": { templateUrl: "/views/partials/home.html" }
+                templateUrl: "/views/partials/home.html",
+                data : {
+                    pageMessage: 'home'
                 }
             })
-            .state('test', {
-                name: 'test',
-                title: 'test',
-                url: '/test',
+            .state('details', {
+                name: 'details',
+                title: 'details',
+                url: '/details',
                 controller: 'user',
-                views: {
-                    "view": { templateUrl: "test.html" }
+                templateUrl: "test.html",
+                data : {
+                    pageMessage: 'Subtab 5 is active! And it\'s a Tab 4 subtab! End!'
                 }
-            }
-        );
+            })
+            .state('salary', {
+                name: 'salary',
+                title: 'salary',
+                url: '/salary',
+                controller: 'user',
+                templateUrl: "test.html",
+                data : {
+                    pageMessage: 'salarysalarysalary'
+                }
+            });
 
     }]);

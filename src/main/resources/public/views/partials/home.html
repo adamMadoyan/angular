@@ -1,1 +1,15 @@
-<h1>User home page</h1>
+<div>
+    <h1>email -> {{user.email}}</h1>
+
+    <tabset id="user">
+        <tab heading="details" ui-sref="details" active="tabs['details']" title="Activate details">
+        </tab>
+        <tab heading="salary" ui-sref="salary" active="tabs['salary']" title="Activate salary">
+        </tab>
+    </tabset>
+    <div class="row">
+        <div class="col-sm-12">{{pageMessage}}</div>
+    </div>
+
+
+</div>
