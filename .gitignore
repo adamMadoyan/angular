@@ -1,5 +1,5 @@
 .idea
 target/
 out/
-usermanagement.iml
+*.iml
 *.class
