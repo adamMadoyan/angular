@@ -11,32 +11,69 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 name: 'login',
                 title: 'login',
                 url: '/login',
-                views: {
-                    "view": { templateUrl: "/views/partials/login.html" }
+                templateUrl: "/views/partials/login.html",
+                controller: 'login',
+                data: {
+                    pageMessage: 'login'
                 },
-                controller: function($scope) {
-                    console.info('sdfsdfsdf');
-                    $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
-                }
+                isAuth : false
             })
             .state('home', {
                 name: 'home',
                 title: 'home',
                 url: '/home',
                 controller: 'home',
-                views: {
-                    "view": { templateUrl: "/views/partials/home.html" }
-                }
+                templateUrl: "/views/partials/home.html",
+                data: {
+                    pageMessage: 'home'
+                },
+                isAuth : true
             })
-            .state('test', {
-                name: 'test',
-                title: 'test',
-                url: '/test',
+            .state('admin', {
+                name : 'admin',
+                title : 'admin',
+                url : '/admin',
+                controller: 'adminCtrl',
+                templateUrl : '/views/partials/admin/home.html',
+                isAuth : true
+            })
+            .state('details', {
+                name: 'details',
+                title: 'details',
+                url: '/details',
                 controller: 'user',
-                views: {
-                    "view": { templateUrl: "test.html" }
+                templateUrl: "test.html",
+                data: {
+                    pageMessage: 'Subtab 5 is active! And it\'s a Tab 4 subtab! End!'
+                },
+                isAuth : true
+            })
+            .state('salary', {
+                name: 'salary',
+                title: 'salary',
+                url: '/salary',
+                controller: 'user',
+                templateUrl: "test.html",
+                data: {
+                    pageMessage: 'salarysalarysalary'
+                },
+                isAuth : true
+            });
+
+    }]).
+    run(function ($rootScope, $location) {
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            console.info('**************////*******');
+            if ($rootScope.loggedInUser == null) {
+                console.info('---------------');
+                // no logged user, redirect to /login
+                if (next.templateUrl === "partials/login.html") {
+                    console.info('++++++++++++++++');
+                } else {
+                    $location.path("/login");
                 }
             }
-        );
+        });
+    }
+);
 
-    }]);

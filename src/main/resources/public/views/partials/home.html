@@ -1,1 +1,73 @@
-<h1>User home page</h1>
+<style>
+    p {
+        font-size: 22px;
+        font-weight: bold;
+        font-style: italic;
+        color: rgb(62, 62, 62);
+        margin: 18px;
+    }
+
+    ul {
+        float: left;
+        border-radius: 5px;
+        border: solid 1px rgb(198, 198, 198);
+        padding: 7px 11px;
+        background-color: rgb(248, 248, 248);
+    }
+
+    li {
+        float: left;
+        background-color: rgb(200, 200, 200);
+        padding: 5px 19px;
+        margin: 5px 2px 5px 0px;
+        color: black;
+        list-style: none;
+    }
+
+    li:hover, li:hover a {
+        background-color: rgb(6, 179, 6);
+        color: white;
+    }
+
+    li a {
+        text-decoration: none;
+        color: white;
+        font-size: 21px;
+        font-style: italic;
+        text-shadow: 1px 0px 3px rgb(157, 157, 157);
+    }
+
+    li:nth-child(1) {
+        border-radius: 4px 0px 0px 4px;
+        margin-left: 1px;
+    }
+
+    li:nth-child(2) {
+        border-radius: 0px 4px 4px 0px;
+    }
+
+    .active {
+        background-color: rgb(6, 179, 6);
+    }
+</style>
+
+<ng-include src="'views/partials/header.html'"></ng-include>
+
+<section>
+    <ul ng-init="tab = 1">
+        <li ng-class="{active:tab===1}">
+            <a href ng-click="tab = 1">Details</a>
+        </li>
+        <li ng-class="{active:tab===2}">
+            <a href ng-click="tab = 2">Salary</a>
+        </li>
+        <br><br>
+
+        <p ng-show="tab === 1"> {{user.email}} </p>
+
+        <p ng-show="tab === 2"> {{user.firstName}} </p>
+    </ul>
+</section>
+
+<!--<div class="gridStyle" ng-grid="gridOptions">-->
+<!--</div>-->
