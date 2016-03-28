@@ -47,7 +47,7 @@ UserManagement.app.controllers.controller("adminCtrl",
                     controller: function ($scope, item) {
                         $scope.user = item;
                     },
-                    size: 'sm',
+                    size: '570px',
                     resolve: {
                         item: function () {
                             return $scope.selectedUser;

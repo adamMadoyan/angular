@@ -1,9 +1,8 @@
 package com.usermanagement.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.Email;
@@ -33,6 +32,24 @@ public class User implements Serializable {
     @Email
     private String email;
 
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "avatar")
+    private String avatar;
+
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "dob")
+    private Date dob;
+
     @Column(name = "isAdmin")
     private boolean isAdmin;
 
@@ -44,13 +61,19 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.isAdmin = user.isAdmin();
-        this.password = user.getPassword();
+    public User(String firstName, String lastName, String email, String gander, String avatar,
+                String department, String address, String phone, Date dob, boolean isAdmin, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gander;
+        this.avatar = avatar;
+        this.department = department;
+        this.address = address;
+        this.phone = phone;
+        this.dob = dob;
+        this.isAdmin = isAdmin;
+        this.password = password;
     }
 
     public int getId() {
@@ -85,16 +108,64 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
