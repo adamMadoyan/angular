@@ -5,10 +5,18 @@
  */
 
 UserManagement.app.controllers.controller("login",
-    ["$scope", "Restangular", "$state", "$cookies",
-        function ($scope, Restangular, $state, $cookies) {
+    ["$scope", "Restangular", "$state", "$cookies", "cookieService",
+        function ($scope, Restangular, $state, $cookies, cookieService) {
 
             console.info('login controller');
+
+            (function checkUserLoggedIn() {
+                console.info('auto called function');
+                var user = cookieService.getUser();
+                if(user) {
+                    $state.go('home');
+                }
+            })();
 
             $scope.data = {
                 email: "test@mail.ru",
@@ -28,7 +36,7 @@ UserManagement.app.controllers.controller("login",
                 Restangular.one('login').customGET('', {email: $scope.data.email, password: $scope.data.password})
                     .then(function (data) {
                         if (data.code == 200) {
-                            $cookies.putObject('user', data.data);
+                            cookieService.setUser(data.data);
                             $state.go('home');
                         }
                     }

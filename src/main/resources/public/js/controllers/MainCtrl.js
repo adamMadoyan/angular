@@ -3,20 +3,17 @@
 UserManagement.app.controllers.controller("main",
     ["$rootScope", "$scope", "$state", "cookieService",
         function ($rootScope, $scope, $state, cookieService) {
-            console.info('main controller');
             $state.go('login');
 
-            console.info('end main');
-
-
-            function logout() {
-                console.info('log out');
-            }
+            $scope.logout = function () {
+                cookieService.removeUser();
+                $state.go('login');
+            };
 
             $rootScope.$on('$stateChangeStart',
                 function (event, toState, toParams, fromState, fromParams) {
-                    var val = cookieService.get();
-                    if (toState.isAuth && (angular.isUndefined(val) || val == null)) {
+                    var user = cookieService.getUser();
+                    if (toState.isAuth && (angular.isUndefined(user) || user == null)) {
                         $state.go('login');
                         event.preventDefault();
                     }

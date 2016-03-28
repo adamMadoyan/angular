@@ -21,6 +21,4 @@ function ($scope, $state, Restangular, $cookies) {
     $scope.gridOptions = { data: 'myData' };
 
     $scope.user = $cookies.getObject('user');
-
-    console.info($scope.user);
 }]);
