@@ -13,9 +13,10 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 url: '/login',
                 templateUrl: "/views/partials/login.html",
                 controller: 'login',
-                data : {
+                data: {
                     pageMessage: 'login'
-                }
+                },
+                isAuth : false
             })
             .state('home', {
                 name: 'home',
@@ -23,9 +24,10 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 url: '/home',
                 controller: 'home',
                 templateUrl: "/views/partials/home.html",
-                data : {
+                data: {
                     pageMessage: 'home'
-                }
+                },
+                isAuth : true
             })
             .state('details', {
                 name: 'details',
@@ -33,9 +35,10 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 url: '/details',
                 controller: 'user',
                 templateUrl: "test.html",
-                data : {
+                data: {
                     pageMessage: 'Subtab 5 is active! And it\'s a Tab 4 subtab! End!'
-                }
+                },
+                isAuth : true
             })
             .state('salary', {
                 name: 'salary',
@@ -43,9 +46,26 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 url: '/salary',
                 controller: 'user',
                 templateUrl: "test.html",
-                data : {
+                data: {
                     pageMessage: 'salarysalarysalary'
-                }
+                },
+                isAuth : true
             });
 
-    }]);
+    }]).
+    run(function ($rootScope, $location) {
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            console.info('**************////*******');
+            if ($rootScope.loggedInUser == null) {
+                console.info('---------------');
+                // no logged user, redirect to /login
+                if (next.templateUrl === "partials/login.html") {
+                    console.info('++++++++++++++++');
+                } else {
+                    $location.path("/login");
+                }
+            }
+        });
+    }
+);
+
