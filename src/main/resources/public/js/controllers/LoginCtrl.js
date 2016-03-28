@@ -8,19 +8,24 @@ UserManagement.app.controllers.controller("login",
     ["$scope", "Restangular", "$state", "$cookies", "cookieService",
         function ($scope, Restangular, $state, $cookies, cookieService) {
 
-            console.info('login controller');
-
             (function checkUserLoggedIn() {
-                console.info('auto called function');
                 var user = cookieService.getUser();
-                if(user) {
-                    $state.go('home');
+                if (user) {
+                    if (user.admin) {
+                        $state.go('admin');
+                    } else {
+                        $state.go('home');
+                    }
                 }
             })();
 
+            //$scope.data = {
+            //    email: "test@mail.ru",
+            //    password: "test"
+            //};
             $scope.data = {
-                email: "test@mail.ru",
-                password: "qwerty"
+                email: "admin@mail.ru",
+                password: "admin"
             };
 
             //$scope.users = [];
@@ -35,12 +40,16 @@ UserManagement.app.controllers.controller("login",
 
                 Restangular.one('login').customGET('', {email: $scope.data.email, password: $scope.data.password})
                     .then(function (data) {
-                        if (data.code == 200) {
-                            cookieService.setUser(data.data);
-                            $state.go('home');
+                            if (data.code == 200) {
+                                cookieService.setUser(data.data);
+                                if (data.data.admin) {
+                                    $state.go('admin');
+                                } else {
+                                    $state.go('home');
+                                }
+                            }
                         }
-                    }
-                );
+                    );
             };
 
             //$scope.addUser = function () {
@@ -57,18 +66,8 @@ UserManagement.app.controllers.controller("login",
             //        });
             //    console.info('end');
             //};
-            //
-            //Restangular.all('users')
-            //    .customGET("", {limit: 4, offset: 0})
-            //    .then(function (users) {
-            //        $scope.users = users.content;
-            //    }
-            //);
-            //
-            //$scope.showModal = false;
-            //$scope.toggleModal = function(){
-            //    $scope.showModal = !$scope.showModal;
-            //};
+
+
 
 
         }

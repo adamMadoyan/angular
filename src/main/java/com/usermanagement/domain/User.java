@@ -33,6 +33,9 @@ public class User implements Serializable {
     @Email
     private String email;
 
+    @Column(name = "isAdmin")
+    private boolean isAdmin;
+
     @Column(name = "password")
     @NotEmpty
     @Length(min = 5, max = 50)
@@ -46,6 +49,7 @@ public class User implements Serializable {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.isAdmin = user.isAdmin();
         this.password = user.getPassword();
     }
 
@@ -83,6 +87,14 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public void setPassword(String password) {

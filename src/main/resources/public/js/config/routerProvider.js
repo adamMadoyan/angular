@@ -29,6 +29,14 @@ UserManagement.app.config(["$stateProvider", "$urlRouterProvider",
                 },
                 isAuth : true
             })
+            .state('admin', {
+                name : 'admin',
+                title : 'admin',
+                url : '/admin',
+                controller: 'adminCtrl',
+                templateUrl : '/views/partials/admin/home.html',
+                isAuth : true
+            })
             .state('details', {
                 name: 'details',
                 title: 'details',

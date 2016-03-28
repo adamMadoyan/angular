@@ -18,4 +18,3 @@ UserManagement.app.services.service('cookieService', function ($cookies, $rootSc
     };
 
 });
-
