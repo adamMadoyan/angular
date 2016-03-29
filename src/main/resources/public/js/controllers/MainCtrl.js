@@ -16,6 +16,9 @@ UserManagement.app.controllers.controller("main",
                     if (toState.isAuth && (angular.isUndefined(user) || user == null)) {
                         $state.go('login');
                         event.preventDefault();
+                    } else if (toState.isAdmin && !user.admin) {
+                        $state.go(fromState);
+                        event.preventDefault();
                     }
                 }
             );
