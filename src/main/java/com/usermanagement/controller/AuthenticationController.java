@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Description for class.
@@ -27,8 +27,8 @@ public class AuthenticationController {
     @Autowired
     private UserManager userManager;
 
-    @RequestMapping(value = "/login", method = GET)
-    public ResponseDTO login(@Param("email") String email, @Param("password") String password) {
+    @RequestMapping(value = "/login", method = POST)
+    public ResponseDTO loginPost(@Param("email") String email, @Param("password") String password) {
         try {
             User user = userManager.getUserBy(email, password);
             return new ResponseDTO(OK, "User", user);

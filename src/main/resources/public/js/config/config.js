@@ -19,6 +19,10 @@ UserManagement.app.constant("Config", {
             getAll: {
                 url: baseUrl + "/users",
                 method: "GET"
+            },
+            login : {
+                url: baseUrl + "/login",
+                method: "POST"
             }
         }
     }
